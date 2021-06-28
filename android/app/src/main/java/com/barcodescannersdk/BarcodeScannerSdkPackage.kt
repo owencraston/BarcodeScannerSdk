@@ -8,7 +8,7 @@ import com.facebook.react.uimanager.ViewManager
 class BarcodeScannerSdkPackage : ReactPackage {
   override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> {
     val socketScannerSdk = SocketScannerSdk(reactContext, CaptureClientProvider.capture)
-    return listOf(BarcodeScannerSdkModule(reactContext, socketScannerSdk))
+    return listOf(BarcodeScannerSdkModule(reactContext, socketScannerSdk), BluetoothModule(reactContext))
   }
 
   override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {
