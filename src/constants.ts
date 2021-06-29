@@ -1,0 +1,11 @@
+export const NavigationKeys = {
+  BARCODE_SCANNER_SDK: 'BarcodeScannerSdk',
+  BARCODE_SCANNER_SDK_TURN_ON_SCANNER: 'TurnOnBarcodeScanner',
+  BARCODE_SCANNER_SDK_TURN_ON_PAIRING: 'TurnOnPairing',
+  BARCODE_SCANNER_SDK_PAIR_SCANNER: 'PairBarcodeScanner',
+  BARCODE_SCANNER_SDK_BARCODE_LOCATION_PERMISSION: 'BarcodeLocationPermission',
+  BARCODE_SCANNER_SDK_CONNECTION_STATE: 'ScannerConnectionState',
+  BARCODE_SCANNER_SDK_TROUBLESHOOT_PAIRING: 'TroubleShootPairScanner',
+  BARCODE_SCANNER_SDK_DETAILS: 'ScannerDetails',
+  BARCODE_SCANNER_SDK_EDIT_BARCODE_SCANNER_NAME: 'EditBarcodeScannerNameScreen',
+};

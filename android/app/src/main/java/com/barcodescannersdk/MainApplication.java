@@ -43,6 +43,13 @@ public class MainApplication extends Application implements ReactApplication {
 
   @Override
   public void onCreate() {
+        CaptureClientProvider.initializeCapture(
+      /* context */ this,
+      /* appId */ BuildConfig.APPLICATION_ID,
+      /* socketSignature */ BuildConfig.SOCKET_SIGNATURE,
+      /* socketDevId */ BuildConfig.SOCKET_DEV_ID,
+      /* isDebugMode */ BuildConfig.DEBUG
+    );
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
