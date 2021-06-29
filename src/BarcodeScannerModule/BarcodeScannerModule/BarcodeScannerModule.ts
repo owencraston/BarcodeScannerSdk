@@ -62,6 +62,9 @@ class BarcodeScannerModuleImpl implements BarcodeScannerModule {
     this.pairingResult = DeviceEventEmitter.addListener(
       BARCODE_DEVICE_EVENT,
       (barcodeScannerState?: BarcodeScannerState) => {
+        console.log(
+          `${BARCODE_DEVICE_EVENT} with ${barcodeScannerState} state`,
+        );
         onDeviceStateChnaged(barcodeScannerState);
       },
     );

@@ -1,5 +1,5 @@
-import type { EmitterSubscription } from 'react-native';
-import { DeviceEventEmitter } from 'react-native';
+import type {EmitterSubscription} from 'react-native';
+import {DeviceEventEmitter} from 'react-native';
 
 import BluetoothDevice from './utils';
 
@@ -12,17 +12,27 @@ class BluetoothDeviceModule implements HardwareModule {
   private scanResult: EmitterSubscription | undefined;
   private pairingResult: EmitterSubscription | undefined;
 
-  private scanListeners: BluetoothScanListener[] = new Array<BluetoothScanListener>();
-  private pairingListeners: BluetoothPairingListener[] = new Array<BluetoothPairingListener>();
+  private scanListeners: BluetoothScanListener[] =
+    new Array<BluetoothScanListener>();
+  private pairingListeners: BluetoothPairingListener[] =
+    new Array<BluetoothPairingListener>();
 
   init() {
-    this.scanResult = DeviceEventEmitter.addListener('BT_DEVICES_FOUND', data => {
-      this.scanListeners.forEach(listener => listener.onScan(data));
-    });
-    this.pairingResult = DeviceEventEmitter.addListener('BT_CONNECTION_STATE', data => {
-      console.log(`Got pairing event: ${JSON.stringify(data)}`);
-      this.pairingListeners.forEach(listener => listener.onPairingStateChanged(data));
-    });
+    this.scanResult = DeviceEventEmitter.addListener(
+      'BT_DEVICES_FOUND',
+      data => {
+        this.scanListeners.forEach(listener => listener.onScan(data));
+      },
+    );
+    this.pairingResult = DeviceEventEmitter.addListener(
+      'BT_CONNECTION_STATE',
+      data => {
+        console.log(`Got pairing event: ${JSON.stringify(data)}`);
+        this.pairingListeners.forEach(listener =>
+          listener.onPairingStateChanged(data),
+        );
+      },
+    );
   }
 
   addScanListener(listener: BluetoothScanListener) {

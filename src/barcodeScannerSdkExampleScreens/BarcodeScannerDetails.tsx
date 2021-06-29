@@ -8,7 +8,6 @@ import {
   DeviceEventEmitter,
   Image,
   ScrollView,
-  View,
 } from 'react-native';
 
 import {NavigationKeys} from '../constants';

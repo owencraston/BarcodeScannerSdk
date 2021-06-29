@@ -1,6 +1,6 @@
 import type {ReactNode, Dispatch, SetStateAction} from 'react';
 import React, {createContext, useContext, useState, useMemo} from 'react';
-import { BarcodeScannerState } from '../BarcodeScannerModule';
+import {BarcodeScannerState} from '../BarcodeScannerModule';
 
 interface BarcodeScannerContextValue {
   barcodeScanner?: BarcodeScannerState;
@@ -25,7 +25,9 @@ interface BarcodeScannerContextProviderProps {
   children: ReactNode;
 }
 
-export const BarcodeScannerContextProvider = ({children}: BarcodeScannerContextProviderProps) => {
+export const BarcodeScannerContextProvider = ({
+  children,
+}: BarcodeScannerContextProviderProps) => {
   const [barcodeScanner, setBarcodeScanner] = useState<BarcodeScannerState>();
   const value = useMemo(
     () => ({barcodeScanner, setBarcodeScanner}),

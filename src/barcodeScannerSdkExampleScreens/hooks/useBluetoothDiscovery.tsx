@@ -3,7 +3,9 @@ import {useFocusEffect} from '@react-navigation/native';
 
 import BluetoothModule from '../bluetooth/BluetoothModule';
 import BluetoothDevice from '../bluetooth/utils';
-import BluetoothDeviceModule, {BluetoothScanListener} from '../bluetooth/BluetoothDeviceModule';
+import BluetoothDeviceModule, {
+  BluetoothScanListener,
+} from '../bluetooth/BluetoothDeviceModule';
 
 const useBluetoothDiscovery = (filter: string): BluetoothDevice[] => {
   const [devices, setDevices] = useState<BluetoothDevice[]>([]);

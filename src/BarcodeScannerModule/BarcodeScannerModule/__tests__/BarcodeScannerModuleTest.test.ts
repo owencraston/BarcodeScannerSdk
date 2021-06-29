@@ -1,6 +1,10 @@
 import {DeviceEventEmitter, NativeModules} from 'react-native';
 
-import {BARCODE_DEVICE_EVENT, BARCODE_SCAN_RESULT, BarcodeScannerModule} from '../BarcodeScannerModule';
+import {
+  BARCODE_DEVICE_EVENT,
+  BARCODE_SCAN_RESULT,
+  BarcodeScannerModule,
+} from '../BarcodeScannerModule';
 
 const mockPlatform = 'android';
 
@@ -42,13 +46,17 @@ describe('BarcodeScannerModule', () => {
   });
 
   it('initializing the BarcodeScannerModule calls the native onSessionStarted method', () => {
-    BarcodeScannerModule.init(listenerTypePriorities);
-    expect(mockNativeBarcodeScannerSdkModule.onSessionStarted).toHaveBeenCalled();
+    BarcodeScannerModule.init(listenerTypePriorities, () => {});
+    expect(
+      mockNativeBarcodeScannerSdkModule.onSessionStarted,
+    ).toHaveBeenCalled();
   });
 
   it('destroy calls the native onSessionStopped method', () => {
     BarcodeScannerModule.destroy();
-    expect(mockNativeBarcodeScannerSdkModule.onSessionStopped).toHaveBeenCalled();
+    expect(
+      mockNativeBarcodeScannerSdkModule.onSessionStopped,
+    ).toHaveBeenCalled();
   });
 
   it('connect calls the native connect method', () => {
@@ -69,25 +77,31 @@ describe('BarcodeScannerModule', () => {
   it('updateScannerName calls the native updateScannerName method', () => {
     const updatedName = 'new name';
     BarcodeScannerModule.updateScannerName(updatedName);
-    expect(mockNativeBarcodeScannerSdkModule.updateScannerName).toHaveBeenCalledWith(updatedName);
+    expect(
+      mockNativeBarcodeScannerSdkModule.updateScannerName,
+    ).toHaveBeenCalledWith(updatedName);
   });
 
   it('forgetSavedScanners calls the native forgetSavedScanners method', () => {
     BarcodeScannerModule.forgetSavedScanners();
-    expect(mockNativeBarcodeScannerSdkModule.forgetSavedScanners).toHaveBeenCalled();
+    expect(
+      mockNativeBarcodeScannerSdkModule.forgetSavedScanners,
+    ).toHaveBeenCalled();
   });
 
   it('logs message when BARCODE_SCAN_RESULT initialized', () => {
     const spy = jest.spyOn(console, 'log');
-    BarcodeScannerModule.init(listenerTypePriorities);
+    BarcodeScannerModule.init(listenerTypePriorities, () => {});
     DeviceEventEmitter.emit(BARCODE_SCAN_RESULT, {data: barcode});
     expect(spy).toHaveBeenCalledWith(`Got barcode: ${barcode}`);
   });
 
   it('logs message BARCODE_DEVICE_EVENT when initialized', () => {
     const spy = jest.spyOn(console, 'log');
-    BarcodeScannerModule.init(listenerTypePriorities);
+    BarcodeScannerModule.init(listenerTypePriorities, () => {});
     DeviceEventEmitter.emit(BARCODE_DEVICE_EVENT, mockBarcodeScannerState);
-    expect(spy).toHaveBeenCalledWith(`${BARCODE_DEVICE_EVENT} with ${mockBarcodeScannerState} state`);
+    expect(spy).toHaveBeenCalledWith(
+      `${BARCODE_DEVICE_EVENT} with ${mockBarcodeScannerState} state`,
+    );
   });
 });

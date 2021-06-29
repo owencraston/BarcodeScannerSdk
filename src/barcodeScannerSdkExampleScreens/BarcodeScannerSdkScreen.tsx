@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect, useMemo} from 'react';
 import {Button, SafeAreaView, Text, View, StyleSheet} from 'react-native';
 import {createTurnOnScannerNavParams} from './TurnOnBarcodeScanner';
 import BluetoothDeviceModule from './bluetooth/BluetoothDeviceModule';
@@ -20,20 +20,26 @@ const BarcodeScannerSdkScreen = () => {
   // this screen is acting as the main entry point to your application
   // Usually the BarcodeScannerModule will be initialized in App.tsx
   type ListenerType = 'orders' | 'products';
-  const listenerTypePriorities: ListenerType[] = ['products', 'orders'];
-  const onDeviceStateChanged = (barcodeScannerState?: BarcodeScannerState) => {
-    if (barcodeScannerState) {
-      setBarcodeScanner(barcodeScannerState);
-    } else {
-      setBarcodeScanner(undefined);
-    }
-  };
+  const listenerTypePriorities: ListenerType[] = useMemo(
+    () => ['products', 'orders'],
+    [],
+  );
+  const onDeviceStateChanged = useCallback(
+    (barcodeScannerState?: BarcodeScannerState) => {
+      if (barcodeScannerState) {
+        setBarcodeScanner(barcodeScannerState);
+      } else {
+        setBarcodeScanner(undefined);
+      }
+    },
+    [setBarcodeScanner],
+  );
   useEffect(() => {
     BarcodeScannerModule.init(listenerTypePriorities, onDeviceStateChanged);
     return () => {
       BarcodeScannerModule.destroy();
     };
-  }, []);
+  }, [listenerTypePriorities, onDeviceStateChanged]);
 
   const {navigate} = useNavigation();
   const PairedScanner = () => {
