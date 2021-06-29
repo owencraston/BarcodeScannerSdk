@@ -4,6 +4,7 @@
 - I have been testing this with the `Socket Mobile S740` scanner.
 - To use this app with a scanner you will to run it on a `real device`.
 - This App/Native Module is `NOT IOS READY`.
+- This app also uses [embedded capture](https://github.com/owencraston/BarcodeScannerSdk/blob/main/android/app/libs/embeddedcapturecore-release.aar) library so that it does not need to use the companion service app.
 
 
 ### A Note About keys
