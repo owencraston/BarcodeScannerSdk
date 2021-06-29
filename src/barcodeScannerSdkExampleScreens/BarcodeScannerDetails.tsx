@@ -57,7 +57,7 @@ const BarcodeScannerDetails = () => {
   };
 
   return (
-    <View>
+    <>
       {barcodeScanner ? (
         <ScrollView contentContainerStyle={styles.container}>
           <Text
@@ -125,7 +125,7 @@ const BarcodeScannerDetails = () => {
           />
         </SafeAreaView>
       )}
-    </View>
+    </>
   );
 };
 
