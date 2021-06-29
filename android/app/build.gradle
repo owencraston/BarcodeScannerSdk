@@ -138,7 +138,7 @@ def _gsonVersion = '2.8.7'
  * These credentials are obtained directly from Socket Mobile.
  */
 def socketBarcodeScanner = [
-  devId: "\"ibb57d8e1-f911-47ba-b510-693be162686a\"",
+  devId: "\"bb57d8e1-f911-47ba-b510-693be162686a\"",
   // signature for applicationId 'android:com.barcodescannersdk
   signatureRelease : "\"MC4CFQDbiIsoXEkSGfhFdU7TjDCqErRaMwIVAKjpaxgwDLrsV1n7/WZr8Yxs+vOi\"",
 ]
