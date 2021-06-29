@@ -138,13 +138,9 @@ def _gsonVersion = '2.8.7'
  * These credentials are obtained directly from Socket Mobile.
  */
 def socketBarcodeScanner = [
-  devId: "\"insert dev id here\"",
-  // signature for applicationId 'com.shopify.rnpackages'
-  signatureRelease : "\"insert key here\"",
-  // signature for applicationId 'com.shopify.rnpackages.debug'
-  signatureDebug   : "\"insert debug key here\"",
-  // signature for applicationId 'com.shopify.rnpackages.internal'
-  signatureInternal: "\"insert internal key here\""
+  devId: "\"ibb57d8e1-f911-47ba-b510-693be162686a\"",
+  // signature for applicationId 'android:com.barcodescannersdk
+  signatureRelease : "\"MC4CFQDbiIsoXEkSGfhFdU7TjDCqErRaMwIVAKjpaxgwDLrsV1n7/WZr8Yxs+vOi\"",
 ]
 
 android {
@@ -163,8 +159,9 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
-        // required for socket scanner configurartion
+        // required for socket scanner configuration
         buildConfigField "String", "SOCKET_DEV_ID", socketBarcodeScanner.devId
+        buildConfigField "String", "SOCKET_SIGNATURE", socketBarcodeScanner.signatureRelease
     }
     splits {
         abi {
@@ -185,8 +182,8 @@ android {
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
-            // required for socket scanner configurartion
-            buildConfigField "String", "SOCKET_SIGNATURE", socketBarcodeScanner.signatureDebug
+            // required for socket scanner configuration
+            buildConfigField "String", "SOCKET_SIGNATURE", socketBarcodeScanner.signatureRelease
         }
         release {
             // Caution! In production, you need to generate your own keystore file.
@@ -194,7 +191,7 @@ android {
             signingConfig signingConfigs.debug
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
-            // required for socket scanner configurartion
+            // required for socket scanner configuration
             buildConfigField "String", "SOCKET_SIGNATURE", socketBarcodeScanner.signatureRelease
         }
     }
