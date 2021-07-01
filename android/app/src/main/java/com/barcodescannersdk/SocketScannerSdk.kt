@@ -70,6 +70,8 @@ class SocketScannerSdk(reactContext: ReactContext, private val capture: CaptureC
 
   private var lastUsedDevice: DeviceClient? = null
 
+  private var ready: Boolean = false
+
   private val gson = Gson()
 
   private val bgScope = CoroutineScope(Dispatchers.IO)
@@ -115,7 +117,10 @@ class SocketScannerSdk(reactContext: ReactContext, private val capture: CaptureC
       ConnectionState.DISCONNECTED -> Log.d(logTag, "Connection state change with state DISCONNECTED")
       ConnectionState.CONNECTING -> Log.d(logTag, "Connection state change with state CONNECTING")
       ConnectionState.DISCONNECTING -> Log.d(logTag, "Connection state change with state DISCONNECTING")
-      ConnectionState.READY -> Log.d(logTag, "Connection state change with state READY")
+      ConnectionState.READY -> {
+        Log.d(logTag, "Connection state change with state READY")
+        ready = true
+      }
     }
   }
 
@@ -330,16 +335,19 @@ class SocketScannerSdk(reactContext: ReactContext, private val capture: CaptureC
   }
 
   fun onSessionStarted() {
+    if(ready) return
     capture.connect {
       onCaptureServiceConnectionStateChange(it)
     }
   }
 
   fun onSessionStopped() {
+    if(!ready) return
     capture.disconnect()
   }
 
   fun connect() {
+    if (ready) return
     capture.connect {
       onCaptureServiceConnectionStateChange(it);
     }
